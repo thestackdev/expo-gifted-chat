@@ -507,8 +507,8 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         <KeyboardProvider>
           <KeyboardAvoidingView
             testID={TEST_ID.WRAPPER}
-            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-            keyboardVerticalOffset={Platform.OS === 'android' ? undefined : 0}
+            behavior={'padding'}
+            keyboardVerticalOffset={Platform.OS === 'android' ? 80 : 0}
             style={[styles.fill, styles.contentContainer]}
             onLayout={onInitialLayoutViewLayout}
           >
