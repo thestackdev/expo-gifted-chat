@@ -71,6 +71,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   inverted?: boolean
   loadEarlier?: boolean
   alignTop?: boolean
+  alwaysBounceVertical?: boolean
   scrollToBottom?: boolean
   scrollToBottomStyle?: StyleProp<ViewStyle>
   invertibleScrollViewProps?: object
@@ -94,7 +95,7 @@ interface State {
 }
 
 export default class MessageContainer<
-  TMessage extends IMessage = IMessage,
+  TMessage extends IMessage = IMessage
 > extends React.PureComponent<MessageContainerProps<TMessage>, State> {
   static defaultProps = {
     messages: [],
@@ -113,6 +114,7 @@ export default class MessageContainer<
     scrollToBottom: false,
     scrollToBottomOffset: 200,
     alignTop: false,
+    alwaysBounceVertical: true,
     scrollToBottomStyle: {},
     infiniteScroll: false,
     isLoadingEarlier: false,
@@ -136,6 +138,7 @@ export default class MessageContainer<
     scrollToBottomOffset: PropTypes.number,
     scrollToBottomComponent: PropTypes.func,
     alignTop: PropTypes.bool,
+    alwaysBounceVertical: PropTypes.bool,
     scrollToBottomStyle: StylePropType,
     infiniteScroll: PropTypes.bool,
   }
@@ -205,7 +208,10 @@ export default class MessageContainer<
       this.setState({ showScrollBottom: false, hasScrolled: true })
   }
 
-  renderRow = ({ item, index }: ListRenderItemInfo<TMessage>): React.ReactElement | null => {
+  renderRow = ({
+    item,
+    index,
+  }: ListRenderItemInfo<TMessage>): React.ReactElement | null => {
     if (!item._id && item._id !== 0)
       warning('GiftedChat: `_id` is missing for message', JSON.stringify(item))
 
@@ -324,6 +330,7 @@ export default class MessageContainer<
         }
       >
         <FlashList
+          alwaysBounceVertical={this.props.alwaysBounceVertical}
           ref={this.props.forwardRef}
           extraData={[this.props.extraData, this.props.isTyping]}
           estimatedItemSize={80}
