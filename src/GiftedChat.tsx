@@ -77,6 +77,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   text?: string
   /* Controls whether or not the message bubbles appear at the top of the chat */
   alignTop?: boolean
+  /* Boolean for iOS that enables vertical bounce effect in FlashList  */
+  alwaysBounceVertical?: boolean
   /* enables the scrollToBottom Component */
   scrollToBottom?: boolean
   /* Scroll to bottom wrapper style */
