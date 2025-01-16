@@ -23,7 +23,6 @@ import {
   StyleSheet,
   TextInput,
   TextStyle,
-  View,
   ViewStyle,
   LayoutChangeEvent,
 } from 'react-native'
@@ -57,6 +56,7 @@ import { SystemMessage, SystemMessageProps } from './SystemMessage'
 import { Time, TimeProps } from './Time'
 import * as utils from './utils'
 import { FlashList } from '@shopify/flash-list'
+import Animated from 'react-native-reanimated'
 
 dayjs.extend(localizedFormat)
 
@@ -330,7 +330,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     const { messagesContainerStyle, ...messagesContainerProps } = props
 
     return (
-      <View style={[styles.fill, messagesContainerStyle]}>
+      <Animated.View style={[styles.fill, messagesContainerStyle]}>
         <MessageContainer
           {...messagesContainerProps}
           invertibleScrollViewProps={{
@@ -342,7 +342,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
           isTyping={isTyping}
         />
         {renderChatFooter?.()}
-      </View>
+      </Animated.View>
     )
   }, [
     isInitialized,
