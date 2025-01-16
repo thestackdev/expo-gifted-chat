@@ -330,6 +330,7 @@ export default class MessageContainer<
         }
       >
         <FlashList
+          contentContainerStyle={{ paddingBottom: 80 }}
           alwaysBounceVertical={this.props.alwaysBounceVertical}
           ref={this.props.forwardRef}
           extraData={[this.props.extraData, this.props.isTyping]}
