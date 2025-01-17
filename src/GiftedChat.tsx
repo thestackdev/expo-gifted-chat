@@ -98,6 +98,8 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   dateFormat?: string
   /* Enables the "Load earlier messages" button */
   loadEarlier?: boolean
+  /* Initial index for the scroll view; default is 0 */
+  initialScrollIndex?: number
   /* Display an ActivityIndicator when loading earlier messages */
   isLoadingEarlier?: boolean
   /* Whether to render an avatar for the current user; default is false, only show avatars for other users */
@@ -506,7 +508,9 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   return (
     <GiftedChatContext.Provider value={contextValues}>
       <ActionSheetProvider ref={actionSheetRef}>
-        <KeyboardProvider>
+        <KeyboardProvider
+          statusBarTranslucent={props.isStatusBarTranslucentAndroid}
+        >
           <KeyboardAvoidingView
             testID={TEST_ID.WRAPPER}
             behavior={'padding'}

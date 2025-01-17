@@ -87,6 +87,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   onQuickReply?(replies: Reply[]): void
   infiniteScroll?: boolean
   isLoadingEarlier?: boolean
+  initialScrollIndex?: number
 }
 
 interface State {
@@ -118,6 +119,7 @@ export default class MessageContainer<
     scrollToBottomStyle: {},
     infiniteScroll: false,
     isLoadingEarlier: false,
+    initialScrollIndex: 0,
   }
 
   static propTypes = {
@@ -141,6 +143,7 @@ export default class MessageContainer<
     alwaysBounceVertical: PropTypes.bool,
     scrollToBottomStyle: StylePropType,
     infiniteScroll: PropTypes.bool,
+    initialScrollIndex: PropTypes.number,
   }
 
   state = {
@@ -321,7 +324,7 @@ export default class MessageContainer<
   keyExtractor = (item: TMessage) => `${item._id}`
 
   render () {
-    const { inverted } = this.props
+    const { inverted, initialScrollIndex } = this.props
 
     return (
       <View
@@ -339,6 +342,7 @@ export default class MessageContainer<
           automaticallyAdjustContentInsets={false}
           inverted={inverted}
           data={this.props.messages}
+          initialScrollIndex={initialScrollIndex}
           // @ts-expect-error - moved to FlashList
           renderItem={this.renderRow}
           {...this.props.invertibleScrollViewProps}
